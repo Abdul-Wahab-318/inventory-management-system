@@ -42,6 +42,7 @@ import {
   lineChartOptions,
 } from "variables/charts";
 import { pageVisits, socialTraffic } from "variables/general";
+import AffiliateRequestTable from "components/Tables/AffiliateRequestTable";
 
 export default function Dashboard() {
   // Chakra Color Mode
@@ -51,7 +52,7 @@ export default function Dashboard() {
   const tableRowColor = useColorModeValue("#F7FAFC", "navy.900");
   const borderColor = useColorModeValue("gray.200", "gray.600");
   const textTableColor = useColorModeValue("gray.500", "white");
-
+  console.log(textColor)
   const { colorMode } = useColorMode();
 
   return (
@@ -215,6 +216,7 @@ export default function Dashboard() {
         templateRows={{ lg: "repeat(2, auto)" }}
         className="admin-grid"
         gap='20px'>
+
         <Card
           bg={
             colorMode === "dark"
@@ -235,6 +237,7 @@ export default function Dashboard() {
             />
           </Box>
         </Card>
+
         <Card p='0px' maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction='column' mb='40px' p='28px 0px 0px 22px'>
             <Text color='gray.400' fontSize='sm' fontWeight='bold' mb='6px'>
@@ -248,72 +251,8 @@ export default function Dashboard() {
             <BarChart chartData={barChartData} chartOptions={barChartOptions} />
           </Box>
         </Card>
-        <Card p='0px' maxW={{ sm: "320px", md: "100%" }} h={"400px"} overflowY={"scroll"}>
-          <Flex direction='column'>
-            <Flex align='center' justify='space-between' p='22px'>
-              <Text fontSize='lg' color={textColor} fontWeight='bold'>
-                Affiliate Account Requests
-              </Text>
-            </Flex>
-            <Box overflow={{ sm: "scroll", lg: "hidden" }}>
-              <Table>
-                <Thead>
-                  <Tr bg={tableRowColor}>
-                    <Th color='gray.400' borderColor={borderColor}>
-                      Affiliate name
-                    </Th>
-                    <Th color='gray.400' borderColor={borderColor}>
-                      Email
-                    </Th>
-                    <Th color='gray.400' borderColor={borderColor}>
-                      Phone
-                    </Th>
-                    <Th color='gray.400' borderColor={borderColor}>
-                      Referral
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {pageVisits.map((el, index, arr) => {
-                    return (
-                      <Tr key={index}>
-                        <Td
-                          color={textTableColor}
-                          fontSize='sm'
-                          fontWeight='bold'
-                          borderColor={borderColor}
-                          border={index === arr.length - 1 ? "none" : null}>
-                          { <Link to="">{el.pageName}</Link> }
-                        </Td>
-                        <Td
-                          color={textTableColor}
-                          fontSize='sm'
-                          border={index === arr.length - 1 ? "none" : null}
-                          borderColor={borderColor}>
-                          {el.visitors}
-                        </Td>
-                        <Td
-                          color={textTableColor}
-                          fontSize='sm'
-                          border={index === arr.length - 1 ? "none" : null}
-                          borderColor={borderColor}>
-                          {el.uniqueUsers}
-                        </Td>
-                        <Td
-                          color={textTableColor}
-                          fontSize='sm'
-                          border={index === arr.length - 1 ? "none" : null}
-                          borderColor={borderColor}>
-                          {el.bounceRate}
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-              </Table>
-            </Box>
-          </Flex>
-        </Card>
+
+        <AffiliateRequestTable textColor tableRowColor borderColor textTableColor />
         
         <Card p='0px' maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction='column'>
