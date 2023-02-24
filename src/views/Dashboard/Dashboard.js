@@ -32,6 +32,8 @@ import {
   WalletIcon,
 } from "components/Icons/Icons.js";
 import React from "react";
+import "./Dashboard.css"
+import { Link } from "react-router-dom";
 // Variables
 import {
   barChartData,
@@ -54,7 +56,10 @@ export default function Dashboard() {
 
   return (
     <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
+
+      {/* DASH BOARD TOP CARDS */}
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px' mb='20px'>
+
         <Card minH='125px'>
           <Flex direction='column'>
             <Flex
@@ -69,11 +74,11 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   textTransform='uppercase'>
-                  Today's Money
+                  Total Affiliates
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color={textColor} fontWeight='bold'>
-                    $53,897
+                    45 Affiliates
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -86,14 +91,9 @@ export default function Dashboard() {
                 <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
-            <Text color='gray.400' fontSize='sm'>
-              <Text as='span' color='green.400' fontWeight='bold'>
-                +3.48%{" "}
-              </Text>
-              Since last month
-            </Text>
           </Flex>
         </Card>
+
         <Card minH='125px'>
           <Flex direction='column'>
             <Flex
@@ -108,11 +108,11 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   textTransform='uppercase'>
-                  Today's Users
+                  Account Requestions Pending
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color={textColor} fontWeight='bold'>
-                    $3,200
+                    12
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -127,12 +127,13 @@ export default function Dashboard() {
             </Flex>
             <Text color='gray.400' fontSize='sm'>
               <Text as='span' color='green.400' fontWeight='bold'>
-                +5.2%{" "}
+                +15% {" "}
               </Text>
               Since last month
             </Text>
           </Flex>
         </Card>
+
         <Card minH='125px'>
           <Flex direction='column'>
             <Flex
@@ -147,11 +148,11 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   textTransform='uppercase'>
-                  New Clients
+                  Orders This Month
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color={textColor} fontWeight='bold'>
-                    +2,503
+                    +125
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -165,13 +166,14 @@ export default function Dashboard() {
               </IconBox>
             </Flex>
             <Text color='gray.400' fontSize='sm'>
-              <Text as='span' color='red.500' fontWeight='bold'>
-                -2.82%{" "}
+              <Text as='span' color='green.400' fontWeight='bold'>
+                +2.82%{" "}
               </Text>
               Since last month
             </Text>
           </Flex>
         </Card>
+
         <Card minH='125px'>
           <Flex direction='column'>
             <Flex
@@ -186,11 +188,11 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   textTransform='uppercase'>
-                  Total Sales
+                  Pending Orders
                 </StatLabel>
                 <Flex>
-                  <StatNumber fontSize='lg' color={textColor} fontWeight='bold'>
-                    $173,000
+                  <StatNumber fontSize='lg' color={'red.400'} fontWeight='bold'>
+                    65
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -203,18 +205,15 @@ export default function Dashboard() {
                 <CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
-            <Text color='gray.400' fontSize='sm'>
-              <Text as='span' color='green.400' fontWeight='bold'>
-                +8.12%{" "}
-              </Text>
-              Since last month
-            </Text>
           </Flex>
         </Card>
+
       </SimpleGrid>
+
       <Grid
         templateColumns={{ sm: "1fr", lg: "2fr 1fr" }}
         templateRows={{ lg: "repeat(2, auto)" }}
+        className="admin-grid"
         gap='20px'>
         <Card
           bg={
@@ -226,13 +225,7 @@ export default function Dashboard() {
           maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction='column' mb='40px' p='28px 0px 0px 22px'>
             <Text color='#fff' fontSize='lg' fontWeight='bold' mb='6px'>
-              Sales Overview
-            </Text>
-            <Text color='#fff' fontSize='sm'>
-              <Text as='span' color='green.400' fontWeight='bold'>
-                (+5) more{" "}
-              </Text>
-              in 2022
+              Orders Overview
             </Text>
           </Flex>
           <Box minH='300px'>
@@ -248,38 +241,35 @@ export default function Dashboard() {
               PERFORMANCE
             </Text>
             <Text color={textColor} fontSize='lg' fontWeight='bold'>
-              Total orders
+              Monthly Affiliates
             </Text>
           </Flex>
           <Box minH='300px'>
             <BarChart chartData={barChartData} chartOptions={barChartOptions} />
           </Box>
         </Card>
-        <Card p='0px' maxW={{ sm: "320px", md: "100%" }}>
+        <Card p='0px' maxW={{ sm: "320px", md: "100%" }} h={"400px"} overflowY={"scroll"}>
           <Flex direction='column'>
             <Flex align='center' justify='space-between' p='22px'>
               <Text fontSize='lg' color={textColor} fontWeight='bold'>
-                Page visits
+                Affiliate Account Requests
               </Text>
-              <Button variant='primary' maxH='30px'>
-                SEE ALL
-              </Button>
             </Flex>
             <Box overflow={{ sm: "scroll", lg: "hidden" }}>
               <Table>
                 <Thead>
                   <Tr bg={tableRowColor}>
                     <Th color='gray.400' borderColor={borderColor}>
-                      Page name
+                      Affiliate name
                     </Th>
                     <Th color='gray.400' borderColor={borderColor}>
-                      Visitors
+                      Email
                     </Th>
                     <Th color='gray.400' borderColor={borderColor}>
-                      Unique users
+                      Phone
                     </Th>
                     <Th color='gray.400' borderColor={borderColor}>
-                      Bounce rate
+                      Referral
                     </Th>
                   </Tr>
                 </Thead>
@@ -293,7 +283,7 @@ export default function Dashboard() {
                           fontWeight='bold'
                           borderColor={borderColor}
                           border={index === arr.length - 1 ? "none" : null}>
-                          {el.pageName}
+                          { <Link to="">{el.pageName}</Link> }
                         </Td>
                         <Td
                           color={textTableColor}
@@ -324,15 +314,13 @@ export default function Dashboard() {
             </Box>
           </Flex>
         </Card>
+        
         <Card p='0px' maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction='column'>
             <Flex align='center' justify='space-between' p='22px'>
               <Text fontSize='lg' color={textColor} fontWeight='bold'>
-                Social traffic
+                Top Affiliates
               </Text>
-              <Button variant='primary' maxH='30px'>
-                SEE ALL
-              </Button>
             </Flex>
           </Flex>
           <Box overflow={{ sm: "scroll", lg: "hidden" }}>
@@ -340,12 +328,11 @@ export default function Dashboard() {
               <Thead>
                 <Tr bg={tableRowColor}>
                   <Th color='gray.400' borderColor={borderColor}>
-                    Referral
+                    Affiliate Name
                   </Th>
                   <Th color='gray.400' borderColor={borderColor}>
-                    Visitors
+                    Sales
                   </Th>
-                  <Th color='gray.400' borderColor={borderColor}></Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -367,25 +354,6 @@ export default function Dashboard() {
                         border={index === arr.length - 1 ? "none" : null}>
                         {el.visitors}
                       </Td>
-                      <Td
-                        color={textTableColor}
-                        fontSize='sm'
-                        borderColor={borderColor}
-                        border={index === arr.length - 1 ? "none" : null}>
-                        <Flex align='center'>
-                          <Text
-                            color={textTableColor}
-                            fontWeight='bold'
-                            fontSize='sm'
-                            me='12px'>{`${el.percentage}%`}</Text>
-                          <Progress
-                            size='xs'
-                            colorScheme={el.color}
-                            value={el.percentage}
-                            minW='120px'
-                          />
-                        </Flex>
-                      </Td>
                     </Tr>
                   );
                 })}
@@ -393,6 +361,82 @@ export default function Dashboard() {
             </Table>
           </Box>
         </Card>
+
+        <Card p='0px' maxW={{ sm: "320px", md: "100%" }} >
+          <Flex direction='column'>
+            <Flex align='center' justify='space-between' p='22px'>
+              <Text fontSize='lg' color={textColor} fontWeight='bold'>
+                All Affiliate Accounts
+              </Text>
+            </Flex>
+            <Box overflow={{ sm: "scroll", lg: "hidden" }}>
+              <Table>
+                <Thead>
+                  <Tr bg={tableRowColor}>
+                    <Th color='gray.400' borderColor={borderColor}>
+                      Affiliate name
+                    </Th>
+                    <Th color='gray.400' borderColor={borderColor}>
+                      Email
+                    </Th>
+                    <Th color='gray.400' borderColor={borderColor}>
+                      Phone
+                    </Th>
+                    <Th color='gray.400' borderColor={borderColor}>
+                      Comission
+                    </Th>
+                    <Th color='gray.400' borderColor={borderColor}></Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {pageVisits.map((el, index, arr) => {
+                    return (
+                      <Tr key={index}>
+                        <Td
+                          color={textTableColor}
+                          fontSize='sm'
+                          fontWeight='bold'
+                          borderColor={borderColor}
+                          border={index === arr.length - 1 ? "none" : null}>
+                          { <Link to="">{el.pageName}</Link> }
+                        </Td>
+                        <Td
+                          color={textTableColor}
+                          fontSize='sm'
+                          border={index === arr.length - 1 ? "none" : null}
+                          borderColor={borderColor}>
+                          {el.visitors}
+                        </Td>
+                        <Td
+                          color={textTableColor}
+                          fontSize='sm'
+                          border={index === arr.length - 1 ? "none" : null}
+                          borderColor={borderColor}>
+                          {el.uniqueUsers}
+                        </Td>
+                        <Td
+                          color={textTableColor}
+                          fontSize='sm'
+                          border={index === arr.length - 1 ? "none" : null}
+                          borderColor={borderColor}>
+                          {el.commission}
+                        </Td>
+                        <Td
+                          color={textTableColor}
+                          fontSize='sm'
+                          border={index === arr.length - 1 ? "none" : null}
+                          borderColor={borderColor}>
+                          {<Button variant='primary' fontSize={12}>Profile</Button>}
+                        </Td>
+                      </Tr>
+                    );
+                  })}
+                </Tbody>
+              </Table>
+            </Box>
+          </Flex>
+        </Card>
+
       </Grid>
     </Flex>
   );

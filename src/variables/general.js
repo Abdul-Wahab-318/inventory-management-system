@@ -392,34 +392,39 @@ export const olderTransactions = [
 
 export const pageVisits = [
   {
-    pageName: "/argon/",
-    visitors: "4,569",
-    uniqueUsers: 340,
-    bounceRate: "46,53%"
+    pageName: "Shaharyar Raja",
+    visitors: "shaharyar@gmail.com",
+    uniqueUsers: "03115163419",
+    bounceRate: "None",
+    commission : "20%"
   },
   {
-    pageName: "/argon/index.html",
-    visitors: "3,985",
-    uniqueUsers: 319,
-    bounceRate: "46,53%"
+    pageName: "Abdul Wahab",
+    visitors: "wahabmaliq@gmail.com",
+    uniqueUsers: "03115163419",
+    bounceRate: "Shaharyar",
+    commission : "10%"
   },
   {
-    pageName: "/argon/charts.html",
-    visitors: "3,513",
-    uniqueUsers: 294,
-    bounceRate: "36,49%"
+    pageName: "Umer Farooq",
+    visitors: "umerFarooq@gmail.com",
+    uniqueUsers: "03115163419",
+    bounceRate: "None",
+    commission : "15%"
   },
   {
-    pageName: "/argon/tables.html",
-    visitors: "2,050",
-    uniqueUsers: 147,
-    bounceRate: "50,87%"
+    pageName: "Shanzae Khan",
+    visitors: "shanzae@gmail.com",
+    uniqueUsers: "03115163419",
+    bounceRate: "None",
+    commission : "20%"
   },
   {
-    pageName: "/argon/profile.html",
-    visitors: "1,795",
-    uniqueUsers: 190,
-    bounceRate: "46,53%"
+    pageName: "Abdullah",
+    visitors: "abdullah@gmail.com",
+    uniqueUsers: "03115163419",
+    bounceRate: "Javeria Script" ,
+    commission : "10%"
   },
 ]
 
