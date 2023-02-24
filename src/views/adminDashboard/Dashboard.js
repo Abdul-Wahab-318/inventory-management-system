@@ -109,7 +109,7 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   textTransform='uppercase'>
-                  Account Requestions Pending
+                   Requests Pending
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color={textColor} fontWeight='bold'>
@@ -365,7 +365,7 @@ export default function Dashboard() {
                           fontSize='sm'
                           border={index === arr.length - 1 ? "none" : null}
                           borderColor={borderColor}>
-                          {<Button variant='primary' fontSize={12}>Profile</Button>}
+                          {<Button variant='primary'  fontSize={12}><Link to={`/admin/affiliateOverview/id123`}>Profile</Link></Button>}
                         </Td>
                       </Tr>
                     );

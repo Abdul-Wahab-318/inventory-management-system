@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import Card from 'components/Card/Card';
 import { pageVisits } from 'variables/general';
+import {BsCheckLg , BsX} from 'react-icons/bs'
 
 export default function AffiliateRequestTable() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -37,9 +38,6 @@ export default function AffiliateRequestTable() {
                   <Tr bg={tableRowColor}>
                     <Th color='gray.400' borderColor={borderColor}>
                       Affiliate name
-                    </Th>
-                    <Th color='gray.400' borderColor={borderColor}>
-                      Email
                     </Th>
                     <Th color='gray.400' borderColor={borderColor}>
                       Phone
@@ -69,13 +67,6 @@ export default function AffiliateRequestTable() {
                           fontSize='sm'
                           border={index === arr.length - 1 ? "none" : null}
                           borderColor={borderColor}>
-                          {el.visitors}
-                        </Td>
-                        <Td
-                          color={textTableColor}
-                          fontSize='sm'
-                          border={index === arr.length - 1 ? "none" : null}
-                          borderColor={borderColor}>
                           {el.uniqueUsers}
                         </Td>
                         <Td
@@ -92,8 +83,8 @@ export default function AffiliateRequestTable() {
                           borderColor={borderColor}>
                           { 
                             <>
-                              <Button variant="primary">Approve</Button> 
-                              <Button variant="danger" ms={4}>Decline</Button> 
+                              <Button variant="primary"><BsCheckLg/></Button> 
+                              <Button variant="danger" ms={4}><BsX fontSize={17}/></Button> 
                             </>
                           }
                           
