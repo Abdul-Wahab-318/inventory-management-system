@@ -28,6 +28,9 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 import { SiDropbox } from "react-icons/si";
+import {
+  useColorModeValue
+} from "@chakra-ui/react";
 
 export const dashboardTableData = [
   {

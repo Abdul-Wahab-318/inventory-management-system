@@ -1,7 +1,6 @@
 // import
 import React, { Component }  from 'react';
 import Dashboard from "views/adminDashboard/Dashboard.js";
-import Billing from "views/Dashboard/Billing.js";
 
 import {
   HomeIcon,
