@@ -289,7 +289,7 @@ export function SidebarResponsive(props) {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.redirect) {
+      if ( prop.redirect || !prop.render ) {
         return null;
       }
       if (prop.category) {

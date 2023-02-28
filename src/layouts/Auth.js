@@ -5,7 +5,7 @@ import Footer from "components/Footer/Footer.js";
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "routes.js";
+import { adminRoutes as routes} from "routes.js";
 
 export default function Pages(props) {
   const { ...rest } = props;

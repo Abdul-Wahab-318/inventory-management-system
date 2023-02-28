@@ -21,10 +21,11 @@ import { ItemContent } from "components/Menu/ItemContent";
 import { SearchBar } from "components/Navbars/SearchBar/SearchBar";
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import React from "react";
-import { NavLink } from "react-router-dom";
-import routes from "routes.js";
+import { NavLink, useLocation } from "react-router-dom";
+import { adminRoutes , affiliateRoutes } from "routes.js";
 
 export default function HeaderLinks(props) {
+
   const {
     variant,
     children,
@@ -46,6 +47,13 @@ export default function HeaderLinks(props) {
   if (secondary) {
     navbarIcon = "white";
   }
+
+  let routes = adminRoutes
+  let { pathname } = useLocation()
+  
+  if ( pathname.startsWith("/affiliate") )
+    routes = affiliateRoutes
+
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}

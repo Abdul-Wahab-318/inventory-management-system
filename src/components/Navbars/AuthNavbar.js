@@ -18,7 +18,7 @@ import {
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import routes from "routes.js";
+import { adminRoutes as routes} from "routes.js";
 export default function AuthNavbar(props) {
   const { logo, logoText, secondary, ...rest } = props;
   const { colorMode } = useColorMode();
@@ -65,7 +65,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+  
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
@@ -79,7 +79,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+  
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
@@ -95,7 +95,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+  
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}

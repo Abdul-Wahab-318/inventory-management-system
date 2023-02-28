@@ -57,7 +57,6 @@ export default function Dashboard() {
   return (
     <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
 
-      {/* DASH BOARD TOP CARDS */}
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px' mb='20px'>
 
         <InfoCard heading="Total Affiliates" body="45 Affiliates" Icon={WalletIcon} />
@@ -73,7 +72,7 @@ export default function Dashboard() {
         className="admin-grid"
         gap='20px'>
 
-        <LineGraph lineChartData />
+        <LineGraph lineChartData heading="Sales Overview" />
         
         <TopAffiliateGraph barChartData = {barChartData} />
 

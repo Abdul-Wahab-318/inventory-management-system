@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 import {
     Box,
     Button,
@@ -23,14 +23,31 @@ export default function AffiliateRequestTable() {
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const textTableColor = useColorModeValue("gray.500", "white");
 
+    const [ searchName , setSearchName ] = useState("")
+
+    let searchFilterStyle = {
+      "backgroundColor" : "#F7FAFC" ,
+      "padding" : "8px 20px" ,
+      "borderRadius" : "5px"
+    }
+
   return (
     <section className='affiliate-request-table'>
         <Card p='0px' maxW={{ sm: "320px", md: "100%" }} h={"400px"} overflowY={"scroll"}>
           <Flex direction='column'>
-            <Flex align='center' justify='space-between' p='22px'>
-              <Text fontSize='lg' color={textColor} fontWeight='bold'>
-                Affiliate Account Requests
-              </Text>
+            <Flex align='center' justify={'space-between'} gap='20px' p='22px'>
+              <Box>
+                <Text as={'span'} fontSize='lg' color={textColor} fontWeight='bold'>
+                  Affiliate Account Requests
+                </Text>
+                <Text as={'span'}  fontSize={'lg'} className='text-danger fw-bold ms-2' >
+                  {pageVisits.length}
+                </Text>
+              </Box>
+              <Box>
+                <input type="text" onChange={(e) => setSearchName(e.target.value)} 
+                placeholder='Search A Name' className='search-filter-field' style={searchFilterStyle} />
+              </Box>
             </Flex>
             <Box overflow={{ sm: "scroll", lg: "hidden" }}>
               <Table>
@@ -52,6 +69,8 @@ export default function AffiliateRequestTable() {
                 </Thead>
                 <Tbody>
                   {pageVisits.map((el, index, arr) => {
+                    
+                    if ( el.pageName.toLowerCase().includes(searchName.toLowerCase()) )
                     return (
                       <Tr key={index}>
                         <Td
@@ -60,7 +79,7 @@ export default function AffiliateRequestTable() {
                           fontWeight='bold'
                           borderColor={borderColor}
                           border={index === arr.length - 1 ? "none" : null}>
-                          { <Link to="">{el.pageName}</Link> }
+                          { <Link to={`/admin/affiliateOverview/id123`} >{el.pageName}</Link> }
                         </Td>
                         <Td
                           color={textTableColor}
@@ -91,7 +110,8 @@ export default function AffiliateRequestTable() {
                         </Td>
                         
                       </Tr>
-                    );
+                    )
+
                   })}
                 </Tbody>
               </Table>

@@ -44,7 +44,6 @@ export default function InfoCard( { heading , body , footerNumber = "" , footerT
         </Stat>
         <IconBox
           borderRadius='50%'
-          as='box'
           h={"45px"}
           w={"45px"}
           bg={iconBlue}>

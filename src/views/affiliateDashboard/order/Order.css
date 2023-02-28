@@ -1,0 +1,23 @@
+.order-form :is( input , select )  {
+    border: 2px solid rgb(239, 239, 239);
+    border-radius: 5px;
+    padding: 8px 10px ;
+    width: 100%;
+    font-size: 16px;
+}
+
+.order-form select {
+    padding: 10px 10px;
+}
+.order-form select option {
+    padding: 50px 0;
+    margin: 10px 0;
+}
+.order-form .row {
+    margin-block: 16px ;
+}
+
+.form-error-message {
+    color: var(--bs-danger);
+    padding: 5px 10px ;
+}
