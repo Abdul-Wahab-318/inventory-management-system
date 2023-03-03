@@ -21,3 +21,11 @@
     color: var(--bs-danger);
     padding: 5px 10px ;
 }
+
+@media ( max-width : 768px) {
+    
+    .order-form .row .col-md-6:nth-child(2n)
+    {
+        margin-top: 16px;
+    }
+}

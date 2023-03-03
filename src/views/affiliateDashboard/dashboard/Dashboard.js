@@ -77,7 +77,7 @@ export default function Dashboard() {
         
         <BarGraph barChartData = {barChartData} barChartOptions={barChartOptions} heading="Monthly Orders" />
 
-        <Box>cock</Box>
+        <Box></Box>
       </Grid>
 
 

@@ -1,4 +1,8 @@
-
+.search-filter-field {
+    background-color : #F7FAFC ;
+    padding : 8px 20px ;
+    border-radius: 5px ;
+}
 
 .page-spacing-top {
     padding-top: 80px;

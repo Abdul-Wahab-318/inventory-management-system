@@ -25,12 +25,6 @@ export default function AffiliateRequestTable() {
 
     const [ searchName , setSearchName ] = useState("")
 
-    let searchFilterStyle = {
-      "backgroundColor" : "#F7FAFC" ,
-      "padding" : "8px 20px" ,
-      "borderRadius" : "5px"
-    }
-
   return (
     <section className='affiliate-request-table'>
         <Card p='0px' maxW={{ sm: "320px", md: "100%" }} h={"400px"} overflowY={"scroll"}>
@@ -46,7 +40,7 @@ export default function AffiliateRequestTable() {
               </Box>
               <Box>
                 <input type="text" onChange={(e) => setSearchName(e.target.value)} 
-                placeholder='Search A Name' className='search-filter-field' style={searchFilterStyle} />
+                placeholder='Search A Name' className='search-filter-field'  />
               </Box>
             </Flex>
             <Box overflow={{ sm: "scroll", lg: "hidden" }}>

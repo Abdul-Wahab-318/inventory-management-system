@@ -63,7 +63,7 @@ export default function Order() {
 
       email: Yup.string().email('Invalid email').required('Email is required'),
 
-      phoneNumber : Yup.string().length(10 , "Phone Number must contain 11 digits") , 
+      phoneNumber : Yup.string().length(10 , "Phone Number must contain 11 digits").required("Phone Number is required") , 
       street : Yup.string().min(4 , "Street must be at least 4 characters long").max(60 , "Street can be max 60 characters long") ,
       city : Yup.string().required(), 
 
@@ -132,7 +132,7 @@ export default function Order() {
               <div className='form-error-message'>{formik.errors.phoneNumber}</div>
             ) : null}
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6"  >
             <select
               id="cardType"
               placeholder='Select Card Type'
