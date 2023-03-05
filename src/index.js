@@ -19,8 +19,9 @@ ReactDOM.render(
         <Route path={`/admin`} component={AdminLayout} />
         <Route path={`/affiliate`} component={AffiliateLayout} />
         <Route path={`/rtl`} component={RTLLayout} />
+        <Redirect from={`/`} to="/auth/login"  /> 
         {/* <Redirect from={`/`} to="/admin/dashboard" /> */}
-        <Redirect from={`/`} to="/affiliate/dashboard" />
+        {/* <Redirect from={`/`} to="/affiliate/dashboard" /> */}
       </Switch>
     </HashRouter>
   </ChakraProvider>,

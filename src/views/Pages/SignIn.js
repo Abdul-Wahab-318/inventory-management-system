@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 // Chakra imports
 import {
   Box,
@@ -9,16 +9,18 @@ import {
   HStack,
   Input,
   Icon,
-  Link,
   Switch,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Link  , useHistory  } from "react-router-dom";
 // Assets
 import signInImage from "assets/img/signInImage.png";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 function SignIn() {
+
+  const history = useHistory()
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
   const bgForm = useColorModeValue("white", "navy.800");
@@ -26,6 +28,46 @@ function SignIn() {
   const colorIcons = useColorModeValue("gray.700", "white");
   const bgIcons = useColorModeValue("trasnparent", "navy.700");
   const bgIconsHover = useColorModeValue("gray.50", "whiteAlpha.100");
+
+  let [ email , setEmail ] = useState("")
+  let [ password , setPassword ] = useState("")
+  let [ errors , setErrors ] = useState({ email : "" , password : "" })
+
+  let validate = () => {
+
+
+    let emailError = ""
+    let passwordError = ""
+
+    if (  !email.includes("@") || !email.includes(".com") || email.length < 4)
+      emailError = "Incorrect Email Format"
+
+    if ( password.length < 8 )
+      passwordError = "Password must be atleast 8 characters long"
+
+      setErrors({ email : emailError , password : passwordError })
+
+      // if no error then return true
+      if ( !emailError && !passwordError )
+        return true
+      else
+        return false
+
+  }
+
+  let handleLogin = () => {
+
+    if( validate() )
+    {
+      console.log("login failed")
+      return 
+    }
+    console.log("redirecting")
+    history.push("/affiliate/dashboard")
+
+  }
+  console.log(errors)
+  console.log(email + "   " + password )
   return (
     <Flex position='relative' mb='40px'>
       <Flex
@@ -64,92 +106,24 @@ function SignIn() {
               fontWeight='bold'
               textAlign='center'
               mb='22px'>
-              Register With
-            </Text>
-            <HStack spacing='15px' justify='center' mb='22px'>
-              <Flex
-                justify='center'
-                align='center'
-                w='75px'
-                h='75px'
-                borderRadius='8px'
-                border={useColorModeValue("1px solid", "0px")}
-                borderColor='gray.200'
-                cursor='pointer'
-                transition='all .25s ease'
-                bg={bgIcons}
-                _hover={{ bg: bgIconsHover }}>
-                <Link href='#'>
-                  <Icon as={FaFacebook} color={colorIcons} w='30px' h='30px' />
-                </Link>
-              </Flex>
-              <Flex
-                justify='center'
-                align='center'
-                w='75px'
-                h='75px'
-                borderRadius='8px'
-                border={useColorModeValue("1px solid", "0px")}
-                borderColor='gray.200'
-                cursor='pointer'
-                transition='all .25s ease'
-                bg={bgIcons}
-                _hover={{ bg: bgIconsHover }}>
-                <Link href='#'>
-                  <Icon
-                    as={FaApple}
-                    color={colorIcons}
-                    w='30px'
-                    h='30px'
-                    _hover={{ filter: "brightness(120%)" }}
-                  />
-                </Link>
-              </Flex>
-              <Flex
-                justify='center'
-                align='center'
-                w='75px'
-                h='75px'
-                borderRadius='8px'
-                border={useColorModeValue("1px solid", "0px")}
-                borderColor='gray.200'
-                cursor='pointer'
-                transition='all .25s ease'
-                bg={bgIcons}
-                _hover={{ bg: bgIconsHover }}>
-                <Link href='#'>
-                  <Icon
-                    as={FaGoogle}
-                    color={colorIcons}
-                    w='30px'
-                    h='30px'
-                    _hover={{ filter: "brightness(120%)" }}
-                  />
-                </Link>
-              </Flex>
-            </HStack>
-            <Text
-              fontSize='lg'
-              color='gray.400'
-              fontWeight='bold'
-              textAlign='center'
-              mb='22px'>
-              or
+              Affiliate Login
             </Text>
             <FormControl>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                Name
+                Email
               </FormLabel>
               <Input
                 variant='auth'
                 fontSize='sm'
                 ms='4px'
                 type='text'
-                placeholder='Your full name'
-                mb='24px'
+                placeholder='Your Email'
+                mb='0px'
                 size='lg'
+                onChange={(e)=>setEmail(e.target.value)}
               />
-              <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+              { errors.email ? <Text className="form-error-message" mb={'10px'} >{errors.email}</Text> : <></>}
+              <FormLabel ms='4px' mt={'24px'} fontSize='sm' fontWeight='normal'>
                 Password
               </FormLabel>
               <Input
@@ -158,42 +132,41 @@ function SignIn() {
                 ms='4px'
                 type='password'
                 placeholder='Your password'
-                mb='24px'
+                mb='0px'
                 size='lg'
+                onChange={(e)=>setPassword(e.target.value)}
               />
-              <FormControl display='flex' alignItems='center' mb='24px'>
+              { errors.password ? <Text className="form-error-message" mb={'10px'} >{errors.password}</Text> : <></>}
+              <FormControl display='flex' alignItems='center' mb='24px' mt={'24px'}>
                 <Switch id='remember-login' colorScheme='blue' me='10px' />
                 <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
                   Remember me
                 </FormLabel>
               </FormControl>
               <Button
-                fontSize='10px'
+                fontSize='18px'
                 variant='dark'
                 fontWeight='bold'
                 w='100%'
                 h='45'
+                onClick={()=>handleLogin()}
                 mb='24px'>
-                SIGN UP
+                LOGIN
               </Button>
             </FormControl>
             <Flex
-              flexDirection='column'
+              flexDirection='row'
+              gap="10px"
               justifyContent='center'
               alignItems='center'
               maxW='100%'
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
-                Already have an account?
-                <Link
-                  color={titleColor}
-                  as='span'
-                  ms='5px'
-                  href='#'
-                  fontWeight='bold'>
-                  Sign In
-                </Link>
+                Dont have an account?
               </Text>
+                <Link to="/auth/affiliate-signup">
+                  <b>Sign Up</b>
+                </Link>
             </Flex>
           </Flex>
         </Flex>

@@ -1,11 +1,14 @@
 // chakra imports
-import { Box, ChakraProvider, Portal } from "@chakra-ui/react";
+import { Box, ChakraProvider, Portal , Text } from "@chakra-ui/react";
 import Footer from "components/Footer/Footer.js";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { adminRoutes as routes} from "routes.js";
+import SignIn from "views/Pages/SignIn";
+import SignUp from "views/Pages/SignUp";
+import Dashboard from "./Admin";
 
 export default function Pages(props) {
   const { ...rest } = props;
@@ -84,19 +87,17 @@ export default function Pages(props) {
   document.documentElement.dir = "ltr";
   return (
     <Box ref={navRef} w='100%'>
-      <Portal containerRef={navRef}>
+      {/* <Portal containerRef={navRef}>
         <AuthNavbar secondary={getActiveNavbar(routes)} logoText='' />
-      </Portal>
+      </Portal> */}
       <Box w='100%'>
         <Box ref={wrapper} w='100%'>
           <Switch>
-            {getRoutes(routes)}
-            <Redirect from='/auth' to='/auth/login-page' />
+            <Route path={"/auth/affiliate-login"} component={SignIn} />
+            <Route path={"/auth/affiliate-signup"} component={SignUp} />
+            <Redirect from='/auth' to='/auth/affiliate-login' />
           </Switch>
         </Box>
-      </Box>
-      <Box px='24px' mx='auto' width='1044px' maxW='100%' mt='60px'>
-        <Footer />
       </Box>
     </Box>
   );
