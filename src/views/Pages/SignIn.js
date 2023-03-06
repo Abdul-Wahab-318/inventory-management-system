@@ -46,7 +46,7 @@ function SignIn() {
       passwordError = "Password must be atleast 8 characters long"
 
       setErrors({ email : emailError , password : passwordError })
-
+    
       // if no error then return true
       if ( !emailError && !passwordError )
         return true
@@ -57,7 +57,7 @@ function SignIn() {
 
   let handleLogin = () => {
 
-    if( validate() )
+    if( !validate() )
     {
       console.log("login failed")
       return 
