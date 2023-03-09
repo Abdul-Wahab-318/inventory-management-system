@@ -23,9 +23,11 @@ import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useHistory } from "react-router-dom";
 
 function SignUp() {
 
+  const history = useHistory() 
   const bgForm = useColorModeValue("white", "navy.800");
   const titleColor = useColorModeValue("gray.700", "blue.500");
   const textColor = useColorModeValue("gray.700", "white");
@@ -33,16 +35,19 @@ function SignUp() {
   const bgIcons = useColorModeValue("trasnparent", "navy.700");
   const bgIconsHover = useColorModeValue("gray.50", "whiteAlpha.100");
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const passwordRegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ // Minimum eight characters, at least one letter and one number:
   let affiliateDeals = []
 
   const formik = useFormik({
     initialValues: {
       name : '',
       email : '',
+      password : '' , 
+      confirmPassword : '' , 
       phoneNumber : '', 
       address : '' , 
       refferalID : '' , 
-      affiliateDeals : ['']
+      affiliateDeals : []
     },
     validationSchema: Yup.object({
 
@@ -54,17 +59,25 @@ function SignUp() {
         .required('Email is Required'),
 
       phoneNumber: Yup.string().matches(phoneRegExp , 'Phone number is not valid')
-      .required('Required'),
+      .required('Phone number is Required'),
 
-      address : Yup.string().min("Address must contain atleast 2 characters").max("Address can have at max 100 characters") , 
+      password : Yup.string()
+      .max(30,"Password must not exceed 30 characters")
+      .matches( passwordRegExp , "Password must contain 8 characters , a number and a letter ")
+      .required("Password is required") ,
+
+      confirmPassword : Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match') , 
+
+      address : Yup.string().max(100,"Address can have at max 180 characters") , 
 
       refferalID : Yup.string() ,
 
-      affiliateDeals : Yup.string().required()
+      affiliateDeals : Yup.array().of( Yup.string() ).min(1, "Select an Affiliate Deal").required("You can't leave this blank.")
 
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      console.log("submitting" , values)
+      history.push("/affiliate/dashboard")
     },
   });
 
@@ -75,6 +88,8 @@ function SignUp() {
     else
       affiliateDeals.push(value)
       console.log(affiliateDeals)
+
+      formik.values.affiliateDeals = affiliateDeals
   }
   return (
     <Flex
@@ -105,6 +120,7 @@ function SignUp() {
         <Flex
           direction='column'
           w={'90%'}
+          maxW={"1200px"}
           background='transparent'
           borderRadius='15px'
           p='40px'
@@ -120,9 +136,9 @@ function SignUp() {
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
-            Register As An Affiliate
+            Affiliate Registration
           </Text>
-          <FormControl onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="row">
               <div className="col-md-6">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
@@ -134,13 +150,14 @@ function SignUp() {
                   ms='4px'
                   type='text'
                   placeholder='Your full name'
-                  mb='24px'
+                  mb='14px'
                   size='lg'
                   {...formik.getFieldProps('name')}
                 />
-                   {formik.touched.name && formik.errors.name ? (
-         <div>{formik.errors.name}</div>
-       ) : null}
+                   {
+                    formik.touched.name && formik.errors.name ? 
+                    (<div className="form-error-message">{formik.errors.name}</div>) : null
+                   }
               </div>
               <div className="col-md-6">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
@@ -152,13 +169,18 @@ function SignUp() {
                   ms='4px'
                   type='email'
                   placeholder='Your email address'
-                  mb='24px'
+                  mb='14px'
                   size='lg'
+                  {...formik.getFieldProps('email')}
                 />
+                    {
+                      formik.touched.email && formik.errors.email ? 
+                      (<div className="form-error-message">{formik.errors.email}</div>) : null
+                    }
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-2">
               <div className="col-md-6">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                   Password
@@ -169,9 +191,15 @@ function SignUp() {
                   ms='4px'
                   type='password'
                   placeholder='Your password'
-                  mb='24px'
+                  mb='14px'
                   size='lg'
-                />
+                  {...formik.getFieldProps('password')}
+                  />
+
+                  {
+                    formik.touched.password && formik.errors.password ? 
+                    (<div className="form-error-message">{formik.errors.password}</div>) : null
+                  }
 
               </div>
               <div className="col-md-6">
@@ -184,13 +212,19 @@ function SignUp() {
                     ms='4px'
                     type='password'
                     placeholder='Re Enter password'
-                    mb='24px'
+                    mb='14px'
                     size='lg'
-                  />
+                    {...formik.getFieldProps('confirmPassword')}
+                    />
+  
+                    {
+                      formik.touched.confirmPassword && formik.errors.confirmPassword ? 
+                      (<div className="form-error-message">{formik.errors.confirmPassword}</div>) : null
+                    }
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-2">
               <div className="col-md-6">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                   Phone Number
@@ -201,9 +235,15 @@ function SignUp() {
                   ms='4px'
                   type='text'
                   placeholder='Your Phone Number'
-                  mb='24px'
+                  mb='14px'
                   size='lg'
-                />
+                  {...formik.getFieldProps('phoneNumber')}
+                  />
+  
+                  {
+                    formik.touched.phoneNumber && formik.errors.phoneNumber ? 
+                    (<div className="form-error-message">{formik.errors.phoneNumber}</div>) : null
+                  }
 
               </div>
               <div className="col-md-6">
@@ -216,13 +256,13 @@ function SignUp() {
                     ms='4px'
                     type='text'
                     placeholder='Enter Referral ID'
-                    mb='24px'
+                    mb='14px'
                     size='lg'
                   />
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-2 ">
               <div className="col-md-12">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                   Address
@@ -236,50 +276,53 @@ function SignUp() {
                   ms='4px'
                   type='text'
                   placeholder='Your Address'
-                  mb='24px'
+                  mb='14px'
                   size='lg'
-                />
+                  {...formik.getFieldProps('address')}
+                  />
+  
+                  {
+                    formik.touched.address && formik.errors.address ? 
+                    (<div className="form-error-message">{formik.errors.address}</div>) : null
+                  }
 
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-2">
               <div className="col-md-12">
                 <FormLabel ms='4px' fontSize='md' fontWeight='normal' mb="10px">
                   Choose An Affiliate Deal
                 </FormLabel>
                 
-                <Checkbox value={'standard'} size="lg"
+                <Checkbox value={'standard'} size="md"
                 onChange={(e) => handleCheckBox(e.target.value)} 
                 >
-                  <Text fontSize={'17px'}>Standard: 20% Commission on every sale perform individually (Example: if a person sells 5 cards in a week worth of 12,500 his commission will be 2500).</Text>
+                  <Text fontSize={'16px'}>Standard: 20% Commission on every sale perform individually (Example: if a person sells 5 cards in a week worth of 12,500 his commission will be 2500).</Text>
                 </Checkbox>
 
-                <Checkbox value={'multi-affiliate'} size="lg" my="10px"
+                <Checkbox value={'multi-affiliate'} size="md" my="10px"
                 onChange={(e) => handleCheckBox(e.target.value)} 
                 >
-                  <Text fontSize={'17px'}>Multi-Affiliate: Additional 10% commission on every sale performed by Affiliate you onboarded. (Example: if 2 people joined affiliate team with your referral whatever they sell you will 10% commission over there sell).</Text>
+                  <Text fontSize={'16px'}>Multi-Affiliate: Additional 10% commission on every sale performed by Affiliate you onboarded. (Example: if 2 people joined affiliate team with your referral whatever they sell you will 10% commission over there sell).</Text>
                 </Checkbox>
 
-                <Checkbox value={'influence'} size="lg"
+                <Checkbox value={'influence'} size="md"
                 onChange={(e) => handleCheckBox(e.target.value)} 
                 >
-                  <Text fontSize={'17px'}>Influence: Additional 10% commission on every lead generated by the influencer(youtuber, tiktoker, Instagramer) you collaborated with. (Example: you approached Ducky bhai to do a shoutout for TapitCard with your personal referral and 100 people bought the product. you will get 10% commission on those 100 sales).</Text>
+                  <Text fontSize={'16px'}>Influence: Additional 10% commission on every lead generated by the influencer(youtuber, tiktoker, Instagramer) you collaborated with. (Example: you approached Ducky bhai to do a shoutout for TapitCard with your personal referral and 100 people bought the product. you will get 10% commission on those 100 sales).</Text>
                 </Checkbox>
                 
+                {
+                    formik.touched.affiliateDeals && formik.errors.affiliateDeals ? 
+                    (<div className="form-error-message">{formik.errors.affiliateDeals}</div>) : null
+                  }
 
               </div>
             </div>
 
-
-
-            <FormControl display='flex' alignItems='center' mb='24px' mt="24px">
-              <Switch id='remember-login' colorScheme='blue' me='10px' />
-              <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                Remember me
-              </FormLabel>
-            </FormControl>
             <Button
+              display={'block'}
               fontSize='16px'
               variant='dark'
               fontWeight='bold'
@@ -287,17 +330,17 @@ function SignUp() {
               className="mx-auto"
               h='45'
               type='submit'
-              mb='24px'>
+              mb='14px'>
               SIGN UP
             </Button>
-          </FormControl>
+          </form>
           <Flex
             flexDirection='row'
             gap={'10px'}
             justifyContent='center'
             alignItems='center'
             maxW='100%'
-            mt='0px'>
+            mt='5px'>
             <Text color={textColor} fontWeight='medium'>
               Already have an account?
             </Text>
