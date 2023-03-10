@@ -62,7 +62,10 @@ function SignIn() {
       console.log("login failed")
       return 
     }
-    console.log("redirecting")
+    
+    if ( email === "admin@gmail.com" )
+    history.push("/admin/dashboard")
+    else
     history.push("/affiliate/dashboard")
 
   }
