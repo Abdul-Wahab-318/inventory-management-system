@@ -47,6 +47,7 @@ function SignUp() {
       phoneNumber : '', 
       address : '' , 
       refferalID : '' , 
+      bankAccountNo : '' ,
       affiliateDeals : []
     },
     validationSchema: Yup.object({
@@ -72,7 +73,11 @@ function SignUp() {
 
       refferalID : Yup.string() ,
 
-      affiliateDeals : Yup.array().of( Yup.string() ).min(1, "Select an Affiliate Deal").required("You can't leave this blank.")
+      affiliateDeals : Yup.array().of( Yup.string() ).min(1, "Select an Affiliate Deal").required("You can't leave this blank.") , 
+
+      bankAccountNo : Yup.string().min(11,"Minimum length of account No. is 11 characters ")
+      .max(32 , "Account Number must not exceed 32 characters")
+      .required("Bank account number is required")
 
     }),
     onSubmit: values => {
@@ -263,15 +268,12 @@ function SignUp() {
             </div>
 
             <div className="row mt-2 ">
-              <div className="col-md-12">
+              <div className="col-md-6">
                 <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                   Address
                 </FormLabel>
-                <Textarea
-                  className="css-17ud39b"
-                  pt="15px"
+                <Input
                   variant='auth'
-                  rows="2"
                   fontSize='sm'
                   ms='4px'
                   type='text'
@@ -287,6 +289,29 @@ function SignUp() {
                   }
 
               </div>
+
+              <div className="col-md-6">
+                <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+                  Bank Account Number
+                </FormLabel>
+                <Input
+                  variant='auth'
+                  fontSize='sm'
+                  ms='4px'
+                  type='text'
+                  placeholder='Your Bank Account Number'
+                  mb='14px'
+                  size='lg'
+                  {...formik.getFieldProps('bankAccountNo')}
+                  />
+  
+                  {
+                    formik.touched.bankAccountNo && formik.errors.bankAccountNo ? 
+                    (<div className="form-error-message">{formik.errors.bankAccountNo}</div>) : null
+                  }
+
+              </div>
+
             </div>
 
             <div className="row mt-2">
