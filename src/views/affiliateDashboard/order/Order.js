@@ -37,19 +37,19 @@ export default function Order() {
     let customCardPrice = 2499 
     let businessCardPrice = 3799
 
-    let saleBy ="affiliateId123" , amountPaid = 0 
+    let saleBy ="affiliateId123" , amountPaid = 0 , totalAmount = 0
     let { name , email , phoneNumber , city , street  , cardType } = values 
     
     if ( cardType == 'standard' )
-      amountPaid = standardCardPrice * 0.50 
+      amountPaid = standardCardPrice * 0.50 , totalAmount = standardCardPrice
     else if ( cardType == 'custom' )
-      amountPaid = customCardPrice * 0.50 
+      amountPaid = customCardPrice * 0.50 , totalAmount = customCardPrice
     else
-      amountPaid = businessCardPrice * 0.50
+      amountPaid = businessCardPrice * 0.50, totalAmount = customCardPrice
 
-    let statusDetails = { orderStatus : 'pending' , paymentStatus : 'advance paid' , amountPaid : amountPaid }
+    let statusDetails = { orderStatus : 'pending' , paymentStatus : 'advance-paid' , amountPaid : amountPaid , totalAmount  }
     let customerDetails = { name , email , phoneNumber , city , street }
-    let orderDetails = { statusDetails , customerDetails , saleBy : 'affiliateID123' , dateSold : new Date() , cardType , saleBy } 
+    let orderDetails = { statusDetails , customerDetails , dateSold : new Date() , cardType , saleBy } 
     console.log("order details : " , orderDetails)
 
   }
@@ -71,7 +71,7 @@ export default function Order() {
 
       cardType : Yup.string().required() ,
 
-      designNo : Yup.number().required()
+      designNo : Yup.number()
 
   });
 

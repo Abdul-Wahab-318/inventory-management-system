@@ -24,7 +24,7 @@ import {
   } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
-import { pageVisits, socialTraffic } from "variables/general";
+import { pageVisits, orderDummyData } from "variables/general";
 
 export default function History() {
 
@@ -70,9 +70,9 @@ export default function History() {
                 </Thead>
                 <Tbody>
                   {
-                    pageVisits.map((el, index, arr) => {
+                    orderDummyData.map((el, index, arr) => {
                     
-                      if ( el.pageName.toLowerCase().includes(query.toLowerCase()) )
+                      if ( el.customerDetails.name.toLowerCase().includes(query.toLowerCase()) )
                       return <OrderRow el = {el} index={index} arr={arr} /> 
                       else return <></>
                     }
@@ -102,28 +102,28 @@ const OrderRow = ( { el , index , arr } ) => {
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}
          >
-        { <Link to="">{el.pageName}</Link> }
+        { el._id }
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.visitors}
+        {el.customerDetails.name}
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.uniqueUsers}
+        {el.statusDetails.orderStatus}
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.commission}
+        {el.statusDetails.paymentStatus}
       </Td>
     </Tr>
   )

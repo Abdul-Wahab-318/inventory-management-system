@@ -463,3 +463,193 @@ export const socialTraffic = [
     color: "orange",
   }
 ]
+
+export const affiliatedummyData = [
+  {
+    "_id": "641c858e30d54c8400a8bb22",
+    "id": "aff44",
+    "accountStatus": "active",
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "password": "$2a$10$3eFu5b5zx9W5Q8ujZKtPsoo7pG/WtF5z8ZX0Jxt3qN3vUP9X5DW8G",
+    "phoneNumber": "1234567890",
+    "address": "123 Main St",
+    "refferalID": "aff43",
+    "bankAccountNo": "9876543210",
+    "affiliateDeals": [],
+    "sales": 500,
+    "ordersPlaced": [
+      "641d7906bf8fba129acd44d8",
+      "641d881eb3b611d748c5960e"
+    ],
+    "revenue": 2000,
+    "commission": 0.1,
+    "amountPaid": 3000,
+    "amountRemaining": 1000,
+    "__v": 0
+  } ,
+  {
+    "_id": "641c858e30d54c8400a8bb22",
+    "id": "aff44",
+    "accountStatus": "active",
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "password": "$2a$10$3eFu5b5zx9W5Q8ujZKtPsoo7pG/WtF5z8ZX0Jxt3qN3vUP9X5DW8G",
+    "phoneNumber": "1234567890",
+    "address": "123 Main St",
+    "refferalID": "aff43",
+    "bankAccountNo": "9876543210",
+    "affiliateDeals": [],
+    "sales": 500,
+    "ordersPlaced": [
+      "641d7906bf8fba129acd44d8",
+      "641d881eb3b611d748c5960e"
+    ],
+    "revenue": 2000,
+    "commission": 0.1,
+    "amountPaid": 3000,
+    "amountRemaining": 1000,
+    "__v": 0
+  }
+  ,
+  {
+    "_id": "641c858e30d54c8400a8bb23",
+    "id": "aff45",
+    "accountStatus": "pending",
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "password": "$2a$10$eV5vGn1ji.Tz8.hiPCtRSez.bQ2MiVmUDWuztDg/u5Up5a5nt3IOK",
+    "phoneNumber": "9876543210",
+    "address": "456 Oak Ave",
+    "refferalID": "aff43",
+    "bankAccountNo": "1234567890",
+    "affiliateDeals": [],
+    "sales": 250,
+    "ordersPlaced": [
+      "641d7906bf8fba129acd44d7",
+      "641d881eb3b611d748c5960f"
+    ],
+    "revenue": 1000,
+    "commission": 0.05,
+    "amountPaid": 1500,
+    "amountRemaining": 500,
+    "__v": 0
+  }
+  ,
+  {
+    "_id": "641c858e30d54c8400a8bb24",
+    "id": "aff46",
+    "accountStatus": "active",
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "password": "$2a$10$K1gCMY19RWKjDpxrW8zv7OJaK.zO1quFQKxW8AaA9Xc0KjytNRb5C",
+    "phoneNumber": "5555555555",
+    "address": "789 Elm St",
+    "refferalID": "aff43",
+    "bankAccountNo": "5555555555",
+    "affiliateDeals": [],
+    "sales": 1000,
+    "ordersPlaced": [
+      "641d7906bf8fba129acd44d6",
+      "641d881eb3b611d748c5960c"
+    ],
+    "revenue": 400 ,
+    "commission": 0.25,
+    "amountPaid": 1500,
+    "amountRemaining": 500,
+    "__v": 0      
+  }
+  
+]
+
+export const orderDummyData = [
+  {
+    "statusDetails": {
+        "orderStatus": "pending",
+        "paymentStatus": "commission-paid",
+        "amountPaid": 1000,
+        "affiliatePendingAmount": true
+    },
+    "customerDetails": {
+        "name": "customerName1",
+        "email": "customer1@gmail.com",
+        "phoneNumber": "03115163419",
+        "city": "rawalpindi",
+        "street": "bilal habshi road"
+    },
+    "_id": "6435e92b19a24e454ec583da",
+    "dateSold": "2023-03-23T16:51:57.738Z",
+    "cardType": "standard",
+    "totalAmount": 1799,
+    "saleBy": "641c858e30d54c8400a8bb21",
+    "__v": 0
+  }
+  ,
+
+  {
+    "statusDetails": {
+        "orderStatus": "completed",
+        "paymentStatus": "commission-pending",
+        "amountPaid": 0,
+        "affiliatePendingAmount": false
+    },
+    "customerDetails": {
+        "name": "customerName2",
+        "email": "customer2@gmail.com",
+        "phoneNumber": "0321567890",
+        "city": "Lahore",
+        "street": "Gulberg"
+    },
+    "_id": "6435e92b19a24e454ec583db",
+    "dateSold": "2023-03-24T10:30:45.123Z",
+    "cardType": "custom",
+    "totalAmount": 2499,
+    "saleBy": "641c858e30d54c8400a8bb21",
+    "__v": 0
+  } ,
+
+  {
+    "statusDetails": {
+        "orderStatus": "cancelled",
+        "paymentStatus": "commission-unpaid",
+        "amountPaid": 500,
+        "affiliatePendingAmount": true
+    },
+    "customerDetails": {
+        "name": "customerName3",
+        "email": "customer3@gmail.com",
+        "phoneNumber": "0331478523",
+        "city": "Karachi",
+        "street": "Clifton"
+    },
+    "_id": "6435e92b19a24e454ec583dc",
+    "dateSold": "2023-03-25T15:45:30.987Z",
+    "cardType": "business",
+    "totalAmount": 3799,
+    "saleBy": "641c858e30d54c8400a8bb21",
+    "__v": 0
+  } ,
+
+  {
+    "statusDetails": {
+        "orderStatus": "processing",
+        "paymentStatus": "commission-pending",
+        "amountPaid": 0,
+        "affiliatePendingAmount": false
+    },
+    "customerDetails": {
+        "name": "customerName4",
+        "email": "customer4@gmail.com",
+        "phoneNumber": "0341597532",
+        "city": "Islamabad",
+        "street": "F-8"
+    },
+    "_id": "6435e92b19a24e454ec583dd",
+    "dateSold": "2023-03-26T09:15:20.567Z",
+    "cardType": "standard",
+    "totalAmount": 1799,
+    "saleBy": "641c858e30d54c8400a8bb21",
+    "__v": 0
+  }
+
+]
