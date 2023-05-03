@@ -63,9 +63,6 @@ export default function Dashboard() {
     let [ ordersDelivered , setOrdersDelivered ] = useState(0)
     let [ totalProducts , setTotalProducts ] = useState(0)
     
-    let [lineGraph , setLineGraph] = useState(lineChartData)
-    let [barGraph , setBarGraph] = useState(barChartData)
-
     let fetchDashboardStats = async () =>
     {
       let { data } = await axios.get(`${API_URL}/dashboardStats`)
@@ -78,31 +75,12 @@ export default function Dashboard() {
 
     }
 
-    let fetchGraphStats = async () => {
-      let { data } = await axios.get(`${API_URL}/graphStats`)
-      let graphStats = data.data
-      console.log(graphStats)
-
-      let lineData = [ {
-        name : "Sales Overview" ,
-        data : graphStats.monthWiseSales
-      } ]
-
-      let barData = [ {
-        name : "Monthly Orders" ,
-        data : graphStats.monthWiseOrders
-      } ]
-      setBarGraph( barData )
-      setLineGraph( lineData )
-      
-    }
-
     useEffect( () => {
 
       try{
 
         fetchDashboardStats()
-        fetchGraphStats()
+       // fetchGraphStats()
         
       }
       catch( error )
@@ -129,9 +107,9 @@ export default function Dashboard() {
         className="admin-grid"
         gap='20px'>
 
-        <LineGraph lineChartData={lineGraph} heading="Sales Overview" />
+        <LineGraph lineChartData={lineChartData} heading="Sales Overview" />
         
-        <BarGraph barChartData = {barGraph} barChartOptions={barChartOptions} heading="Monthly Orders" />
+        <BarGraph barChartData = {barChartData} barChartOptions={barChartOptions} heading="Monthly Orders" />
 
 
         

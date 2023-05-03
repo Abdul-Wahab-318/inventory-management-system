@@ -89,8 +89,8 @@ export default function Order() {
     try{
       await axios.post(`${API_URL}/placeOrder` , payload )
       alert.success("Order Placed ! ")
-      // setOrderItems([])
-      // setTotalAmount(0)
+      setOrderItems([])
+      setTotalAmount(0)
     }
     catch(err)
     {
@@ -116,16 +116,12 @@ export default function Order() {
               id="name"
               type="text"
               placeholder='Customer Username *'
-              value={"johndoe"}
               ref={usernameRef}
             />
           </div>
         </div>
 
         <div className="row">
-          {/* <div className="col-md-8">
-            <input type="text" placeholder='Item name' />
-          </div> */}
             <div className="col-md-8">
               <Form.Select aria-label="Default select example" onChange={(e)=>handleItemChange(e)}>
               <option value={0}>Select Item</option>
