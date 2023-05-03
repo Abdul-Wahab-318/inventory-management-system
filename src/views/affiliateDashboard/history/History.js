@@ -25,11 +25,13 @@ import {
 // Custom components
 import Card from "components/Card/Card.js";
 import { pageVisits, orderDummyData } from "variables/general";
+import { API_URL } from 'api'
+import axios from 'axios';
 
 export default function History() {
 
     let [ query , setQuery ] = useState("")
-    let [ category , setCategory ] = useState("")
+    let [ orders , setOrders ] = useState([])
 
     // Chakra Color Mode
     const iconBlue = useColorModeValue("blue.500", "blue.500");
@@ -39,6 +41,26 @@ export default function History() {
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const textTableColor = useColorModeValue("gray.500", "white");
     const { colorMode } = useColorMode();
+
+    let fetchOrders = async () => {
+      try{
+
+        let { data } = await axios.get(`${API_URL}/getCompletedOrders`)
+        let {data : completedOrders} = data 
+        console.log(completedOrders)
+        setOrders(completedOrders)
+      }
+      catch(err)
+      {
+        console.log(err)
+      }
+    }
+
+    React.useEffect(()=>{
+
+      fetchOrders()
+  
+    },[])
 
   return (
     <Box pt={{ base: "120px", md: "75px" }} >
@@ -64,16 +86,16 @@ export default function History() {
                       Order Status
                     </Th>
                     <Th color='gray.400' borderColor={borderColor}>
-                      Payment Status
+                      Amount
                     </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {
-                    orderDummyData.map((el, index, arr) => {
+                    orders.map((el, index, arr) => {
                     
-                      if ( el.customerDetails.name.toLowerCase().includes(query.toLowerCase()) )
-                      return <OrderRow el = {el} index={index} arr={arr} /> 
+                      if ( el.name.toLowerCase().includes(query.toLowerCase()) )
+                      return <OrderRow el = {el} index={index} arr={arr} key={el.name} /> 
                       else return <></>
                     }
 
@@ -102,28 +124,28 @@ const OrderRow = ( { el , index , arr } ) => {
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}
          >
-        { el._id }
+        { el.orderID }
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.customerDetails.name}
+        {el.name}
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.statusDetails.orderStatus}
+        {el.status}
       </Td>
       <Td
         color={textTableColor}
         fontSize='sm'
         border={index === arr.length - 1 ? "none" : null}
         borderColor={borderColor}>
-        {el.statusDetails.paymentStatus}
+        {el.grandTotal}
       </Td>
     </Tr>
   )

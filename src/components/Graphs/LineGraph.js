@@ -12,11 +12,43 @@ import {
   } from "variables/charts";
 import Card from "components/Card/Card.js";
 import LineChart from "components/Charts/LineChart";
-
+import {useState,useEffect} from 'react'
+import axios from "axios";
+import { API_URL } from "api";
 export default function LineGraph  ({lineChartData , heading = "Overview" }) {
 
     const { colorMode } = useColorMode();
-  
+   
+    let [ data , setData ] = useState(lineChartData)
+
+    let fetchGraphData = async () => {
+
+      try{
+        let { data } = await axios.get(API_URL + "/dashboardStats") 
+
+        let monthWiseSales = data.data.monthWiseSales
+
+        let newData = [ {
+          name : "Sales" ,
+          data : monthWiseSales
+        } ]
+
+        setData( newData )
+
+      }
+      catch(err) {
+        console.log(err)
+      }
+      
+    }
+
+    useEffect(() =>{
+
+      fetchGraphData()
+      
+    },[])
+
+
     return (
     <Card
     bg={
@@ -33,7 +65,7 @@ export default function LineGraph  ({lineChartData , heading = "Overview" }) {
       </Flex>
       <Box minH='300px'>
         <LineChart
-          chartData={lineChartData}
+          chartData={data}
           chartOptions={lineChartOptions}
         />
       </Box>

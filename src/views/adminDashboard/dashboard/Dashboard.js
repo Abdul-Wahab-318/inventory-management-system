@@ -44,6 +44,7 @@ import { pageVisits, socialTraffic } from "variables/general";
 import AffiliateRequestTable from "components/Tables/AffiliateRequestTable";
 import InfoCard from "components/Card/InfoCard";
 
+
 export default function Dashboard() {
   // Chakra Color Mode
   const iconBlue = useColorModeValue("blue.500", "blue.500");

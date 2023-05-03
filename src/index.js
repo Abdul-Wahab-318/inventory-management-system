@@ -10,9 +10,21 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./index.css"
 // Custom Chakra theme
 import theme from "theme/theme.js";
+//react alert
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.BOTTOM_CENTER,
+  timeout: 3000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
+}
 
 ReactDOM.render(
   <ChakraProvider theme={theme} resetCss={false} position="relative">
+    <AlertProvider template={AlertTemplate} {...options}>
     <HashRouter>
       <Switch>
         <Route path={`/auth`} component={AuthLayout} />
@@ -24,6 +36,7 @@ ReactDOM.render(
         {/* <Redirect from={`/`} to="/affiliate/dashboard" /> */}
       </Switch>
     </HashRouter>
+    </AlertProvider>
   </ChakraProvider>,
   document.getElementById("root")
 );

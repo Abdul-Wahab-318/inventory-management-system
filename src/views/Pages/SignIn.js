@@ -66,7 +66,7 @@ function SignIn() {
     if ( email === "admin@gmail.com" )
     history.push("/admin/dashboard")
     else
-    history.push("/affiliate/placeOrder")
+    history.push("/affiliate/dashboard")
 
   }
   console.log(errors)
