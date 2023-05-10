@@ -95,7 +95,7 @@ export default function History() {
                     orders.map((el, index, arr) => {
                     
                       if ( el.name.toLowerCase().includes(query.toLowerCase()) )
-                      return <OrderRow el = {el} index={index} arr={arr} key={el.name} /> 
+                      return <OrderRow el = {el} index={index} arr={arr} key={el.orderID} /> 
                       else return <></>
                     }
 

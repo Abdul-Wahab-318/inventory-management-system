@@ -109,7 +109,7 @@ function SignIn() {
               fontWeight='bold'
               textAlign='center'
               mb='22px'>
-              Affiliate Login
+              Admin Login
             </Text>
             <FormControl>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
