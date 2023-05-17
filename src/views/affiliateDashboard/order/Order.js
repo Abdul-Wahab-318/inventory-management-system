@@ -36,6 +36,7 @@ export default function Order() {
   const { colorMode } = useColorMode();
 
   const alert = useAlert()
+  let [user , setUser] = useState({});
   let usernameRef = React.useRef(null)
   let [ orderItems , setOrderItems ] = useState([])
   let [ products , setProducts ] = useState([])
@@ -48,7 +49,6 @@ export default function Order() {
       let { data } = await axios.get(`${API_URL}/getItems`)
       let { data : items } = data 
       setProducts(items)
-      console.log(items)
     }
     catch( err )
     {
@@ -83,7 +83,14 @@ export default function Order() {
   }
 
   let handleSubmit = async () => {
-    let payload = { orderItems , totalAmount , username : usernameRef.current.value }
+    let payload 
+
+    //if admin is placing order then get the user name from text field
+    if ( user.roleId === 0 )
+    payload = { orderItems , totalAmount , username : usernameRef.current.value }
+    else //otherwise no need to enter username , the username of logged in user is automatically entered
+    payload = { orderItems , totalAmount , username : user.username }
+
     console.log("submitting : " , payload)
 
     try{
@@ -102,9 +109,11 @@ export default function Order() {
 
   useEffect(() => {
     fetchProducts()
+    setUser(JSON.parse(localStorage.getItem("user")))
+
   },[])
   console.log(orderItems)
-
+  console.log("user" , user)
   return (
     <Box pt={{ base: "120px", md: "75px" }} w={{base:"100%" , lg : "50%"}} className='mx-auto' >
       <Card>
@@ -112,12 +121,18 @@ export default function Order() {
         <h1 className="fs-2 mb-4">Order Details </h1>
         <div className="row">
           <div className="col-md-12">
-            <input
-              id="name"
-              type="text"
-              placeholder='Customer Username *'
-              ref={usernameRef}
-            />
+            { 
+              user?.roleId === 1 ?
+              <></> 
+              :
+              <input
+                id="name"
+                type="text"
+                placeholder='Customer Username *'
+                ref={usernameRef}
+              />
+            
+            }
           </div>
         </div>
 

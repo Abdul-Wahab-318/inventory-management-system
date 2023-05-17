@@ -15,12 +15,12 @@ import { default as AffiliateDashboard } from 'views/affiliateDashboard/dashboar
 import { default as AffiliateProfile } from 'views/affiliateDashboard/profile/Profile'
 import { default as OrderForm } from 'views/affiliateDashboard/order/Order'
 import { default as AffiliateOrderHistory } from 'views/affiliateDashboard/history/History'
+import Profile from 'views/adminDashboard/Profile';
+import Dashboard from 'views/adminDashboard/dashboard/Dashboard';
+import Inventory from 'views/affiliateDashboard/Inventory';
+// export var adminRoutes = []
 
-export var adminRoutes = []
-
-export var affiliateRoutes = [
-
-
+export var adminRoutes = [
 
   {
     path: "/dashboard",
@@ -29,6 +29,51 @@ export var affiliateRoutes = [
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color='inherit' />,
     component: AffiliateDashboard,
+    layout: "/admin",
+  },
+
+  {
+    path: "/placeOrder",
+    name: "Place Order",
+    render : true ,
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color='inherit' />,
+    component: OrderForm,
+    layout: "/admin",
+  },
+
+  {
+    path: "/orderHistory",
+    name: "Order History",
+    render : true ,
+    rtlName: "لوحة القيادة",
+    icon: <StatsIcon color='inherit' />,
+    component: AffiliateOrderHistory,
+    layout: "/admin",
+  },
+
+  {
+    path: "/inventory",
+    name: "Inventory",
+    render : true ,
+    rtlName: "لوحة القيادة",
+    icon: <SupportIcon color='inherit' />,
+    component: Inventory,
+    layout: "/admin"
+  }
+
+
+
+];
+
+export var affiliateRoutes = [
+  {
+    path: "/profile",
+    name: "Profile",
+    render : true ,
+    rtlName: "لوحة القيادة",
+    icon: <PersonIcon color='inherit' />,
+    component: Profile,
     layout: "/affiliate",
   },
 
@@ -41,17 +86,4 @@ export var affiliateRoutes = [
     component: OrderForm,
     layout: "/affiliate",
   },
-
-  {
-    path: "/orderHistory",
-    name: "Order History",
-    render : true ,
-    rtlName: "لوحة القيادة",
-    icon: <StatsIcon color='inherit' />,
-    component: AffiliateOrderHistory,
-    layout: "/affiliate",
-  },
-
-
-
-];
+]

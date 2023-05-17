@@ -17,10 +17,15 @@ import { Link  , useHistory  } from "react-router-dom";
 // Assets
 import signInImage from "assets/img/signInImage.png";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import axios from "axios";
+import { API_URL } from "api";
+import { useAlert } from "react-alert";
+
 
 function SignIn() {
 
   const history = useHistory()
+  const alert = useAlert()
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
   const bgForm = useColorModeValue("white", "navy.800");
@@ -55,7 +60,25 @@ function SignIn() {
 
   }
 
-  let handleLogin = () => {
+  let fetchUser = async () => {
+
+    try{
+      let { data } = await axios.post(API_URL + "/login" , { email , password } , {withCredentials:true})
+      return data.data
+    }
+    catch(error)
+    {
+      console.log(error)
+      if ( error.response.status === 404 )
+        alert.error("User not found")
+      else
+      alert.error("Could not login")
+    }
+
+  }
+
+
+  let handleLogin = async () => {
 
     if( !validate() )
     {
@@ -63,13 +86,16 @@ function SignIn() {
       return 
     }
     
-    if ( email === "admin@gmail.com" )
-    history.push("/admin/dashboard")
+    let user = await fetchUser()
+    localStorage.setItem("user",JSON.stringify(user))
+    if ( user.roleId === 0 )
+      history.push("/admin/dashboard")
     else
-    history.push("/affiliate/dashboard")
+      history.push("/affiliate/placeOrder")
+
 
   }
-  console.log(errors)
+
   console.log(email + "   " + password )
   return (
     <Flex position='relative' mb='40px'>

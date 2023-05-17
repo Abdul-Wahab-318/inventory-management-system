@@ -46,7 +46,7 @@ const BarChart = ({ chartData, chartOptions }) => {
   let fetchGraphData = async () => {
 
     try{
-      let { data } = await axios.get(API_URL + "/graphStats") 
+      let { data } = await axios.get(API_URL + "/graphStats" , {withCredentials:true}) 
       console.log(data.data)
       let monthWiseOrders = data.data.monthWiseOrders
 

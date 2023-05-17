@@ -47,7 +47,6 @@ export default function History() {
 
         let { data } = await axios.get(`${API_URL}/getCompletedOrders`)
         let {data : completedOrders} = data 
-        console.log(completedOrders)
         setOrders(completedOrders)
       }
       catch(err)
@@ -94,7 +93,7 @@ export default function History() {
                   {
                     orders.map((el, index, arr) => {
                     
-                      if ( el.name.toLowerCase().includes(query.toLowerCase()) )
+                      if ( el.name.toLowerCase().includes(query.toLowerCase()) && el.status == "complete" )
                       return <OrderRow el = {el} index={index} arr={arr} key={el.orderID} /> 
                       else return <></>
                     }

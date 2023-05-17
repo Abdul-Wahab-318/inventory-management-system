@@ -68,6 +68,7 @@ export default function Dashboard() {
       let { data } = await axios.get(`${API_URL}/dashboardStats`)
       let dashBoardStats = data.data
       let { monthlyOrders , totalSale , ordersDelivered , totalProducts } = dashBoardStats
+
       setMonthlyOrders( monthlyOrders )
       setTotalSale( totalSale )
       setOrdersDelivered( ordersDelivered )

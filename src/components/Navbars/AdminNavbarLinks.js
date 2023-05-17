@@ -22,6 +22,7 @@ import { SearchBar } from "components/Navbars/SearchBar/SearchBar";
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { adminRoutes , affiliateRoutes } from "routes.js";
 
 export default function HeaderLinks(props) {
@@ -37,7 +38,7 @@ export default function HeaderLinks(props) {
   } = props;
 
   const { colorMode } = useColorMode();
-
+  const history = useHistory()
   // Chakra Color Mode
   let navbarIcon =
     fixed && scrolled
@@ -54,6 +55,10 @@ export default function HeaderLinks(props) {
   if ( pathname.startsWith("/affiliate") )
     routes = affiliateRoutes
 
+  const handleLogout = () => {
+    history.push("/auth/affiliate-login")
+  } 
+
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -62,28 +67,7 @@ export default function HeaderLinks(props) {
       flexDirection='row'>
       <SearchBar me='18px' />
       <NavLink to='/auth/signin'>
-        <Button
-          ms='0px'
-          px='0px'
-          me={{ sm: "2px", md: "16px" }}
-          color={navbarIcon}
-          variant='no-effects'
-          rightIcon={
-            document.documentElement.dir ? (
-              ""
-            ) : (
-              <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
-            )
-          }
-          leftIcon={
-            document.documentElement.dir ? (
-              <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
-            ) : (
-              ""
-            )
-          }>
-          <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
-        </Button>
+          <Button className="me-3" onClick={handleLogout}>Sign Out</Button>
       </NavLink>
       <SidebarResponsive
         hamburgerColor={"white"}
@@ -120,42 +104,7 @@ export default function HeaderLinks(props) {
         w='18px'
         h='18px'
       />
-      <Menu>
-        <MenuButton>
-          <BellIcon color={navbarIcon} w='18px' h='18px' />
-        </MenuButton>
-        <MenuList p='16px 8px' bg={menuBg}>
-          <Flex flexDirection='column'>
-            <MenuItem borderRadius='8px' mb='10px'>
-              <ItemContent
-                time='13 minutes ago'
-                info='from Alicia'
-                boldInfo='New Message'
-                aName='Alicia'
-                aSrc={avatar1}
-              />
-            </MenuItem>
-            <MenuItem borderRadius='8px' mb='10px'>
-              <ItemContent
-                time='2 days ago'
-                info='by Josh Henry'
-                boldInfo='New Album'
-                aName='Josh Henry'
-                aSrc={avatar2}
-              />
-            </MenuItem>
-            <MenuItem borderRadius='8px'>
-              <ItemContent
-                time='3 days ago'
-                info='Payment succesfully completed!'
-                boldInfo=''
-                aName='Kara'
-                aSrc={avatar3}
-              />
-            </MenuItem>
-          </Flex>
-        </MenuList>
-      </Menu>
+
     </Flex>
   );
 }

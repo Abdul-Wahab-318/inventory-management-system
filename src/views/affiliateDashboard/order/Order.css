@@ -1,4 +1,4 @@
-.order-form :is( input , select )  {
+.order-form :is( input , select , textarea)  {
     border: 2px solid rgb(239, 239, 239);
     border-radius: 5px;
     padding: 8px 10px ;
